@@ -1,26 +1,29 @@
-import React from 'react';
-import { Menu } from 'antd';
-import axios from 'axios';
-import { USER_SERVER } from '../../config';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import { Menu } from "antd";
+import axios from "axios";
+import { USER_SERVER } from "../../config";
+import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
+import "./Navbar.css";
 
 function RightMenu(props) {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
   const logout = () => {
-    axios.get(`${USER_SERVER}/logout`, {
-      headers: {
-        auth: token
-      }
-    }).then(response => {
-      if (response.status === 200) {
-        localStorage.removeItem("token")
-        props.history.push("/login");
-      } else {
-        alert('Logging Out Failed')
-      }
-    });
+    axios
+      .get(`${USER_SERVER}/logout`, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.removeItem("token");
+          props.history.push("/login");
+        } else {
+          alert("Logging Out Failed");
+        }
+      });
   };
   if (!token && user.userData && !user.userData.isAuth) {
     return (
@@ -32,20 +35,20 @@ function RightMenu(props) {
           <a href="/register">Signup</a>
         </Menu.Item>
       </Menu>
-    )
+    );
   } else if (token && user.userData) {
     return (
-      <Menu mode={props.mode}>
+      <Menu mode={props.mode} className="logoutContainer">
         <Menu.Item key="logout">
-          <a onClick={logout}>Logout</a>
+          <a onClick={logout} className="logoutBtn">
+            Logout
+          </a>
         </Menu.Item>
       </Menu>
-    )
-  }
-  else {
-    return (<></>)
+    );
+  } else {
+    return <></>;
   }
 }
 
 export default withRouter(RightMenu);
-
