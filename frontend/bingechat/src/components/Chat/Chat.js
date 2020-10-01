@@ -123,6 +123,7 @@ export class Chat extends Component {
                   prefix={<Icon type="message" style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="Type a Message"
                   type="text"
+                  style={{ boxShadow: "0px 0px 10px #d3d3d3", borderRadius: "5px" }}
                   value={this.state.message}
                   onChange={this.hanleSearchChange}
                 />
@@ -143,7 +144,12 @@ export class Chat extends Component {
               </Col>
 
               <Col span={4}>
-                <Button type="primary" style={{ width: "100%" }} onClick={this.submitMessage} htmlType="submit">
+                <Button
+                  type="primary"
+                  style={{ width: "100%", boxShadow: "0px 0px 30px #d3d3d3", borderRadius: "5px" }}
+                  onClick={this.submitMessage}
+                  htmlType="submit"
+                >
                   <Icon type="enter" />
                 </Button>
               </Col>
