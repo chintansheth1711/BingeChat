@@ -1,0 +1,4 @@
+
+.infinite-container::-webkit-scrollbar {
+    display: none;
+  }
