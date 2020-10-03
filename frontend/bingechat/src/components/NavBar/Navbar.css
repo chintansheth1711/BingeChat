@@ -2,10 +2,8 @@
 
 .menu {
   padding: 0 20px;
-  border-bottom: solid 5px blue;
   overflow: auto;
-  box-shadow: 0 10px 20px grey;
-  background: black;
+  box-shadow: 0 10px 20px lightgray;
 }
 
 .menu__logo {
@@ -61,13 +59,10 @@
   padding: 14px 24px !important;
 }
 
-.logoutContainer {
-  background: black;
-}
 
 .logoutBtn {
-  color: white !important;
-  font-weight: bold;
+  color: black !important;
+  
 }
 
 .logoutBtn:hover {
