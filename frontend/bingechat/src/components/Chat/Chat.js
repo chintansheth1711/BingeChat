@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { getChats, afterPostMessage } from "../../redux/actions/chat_actions";
 import Message from "./Message";
+import Messages from "./Messages/Messages";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import "./Chat.css";
@@ -25,16 +26,16 @@ export class Chat extends Component {
   }
 
   componentDidUpdate() {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    // this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
-  hanleSearchChange = (e) => {
+  handleSearchChange = (e) => {
     this.setState({
       message: e.target.value,
     });
   };
 
-  renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => <Message key={chat._id} {...chat} />);
+  // renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => <Message key={chat._id} {...chat} />);
 
   onDrop = (files) => {
     if (this.props.user.userData && !this.props.user.userData.isAuth) {
@@ -101,31 +102,32 @@ export class Chat extends Component {
     return (
       <React.Fragment>
         <div>
-          <p style={{ fontSize: "2rem", textAlign: "center", padding: "20px", fontWeight: "bold", textDecoration: "underline" }}>{name}</p>
+          <p style={{ fontSize: "2rem", textAlign: "center", fontWeight: "bold", textDecoration: "underline" }}>{name}</p>
         </div>
 
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <div className="infinite-container" style={{ height: "500px", overflowY: "scroll" }}>
-            {this.props.chats && this.renderCards()}
+          <div className="infinite-container" style={{ height: "500px", marginBottom: "15px", overflowY: "scroll" }}>
+            {/* {this.props.chats && this.renderCards()}
             <div
               ref={(el) => {
                 this.messagesEnd = el;
               }}
               style={{ float: "left", clear: "both" }}
             />
+             */}
+            {this.props.chats && <Messages messages={this.props.chats.chats} name={localStorage.getItem("name")} />}
           </div>
 
           <Row>
-            <Form layout="inline" onSubmit={this.submitmessage}>
+            <Form layout="inline" style={{ marginBottom: "50px" }} onSubmit={this.submitmessage}>
               <Col span={18}>
                 <Input
                   id="message"
                   prefix={<Icon type="message" style={{ color: "rgba(0,0,0,.25)" }} />}
                   placeholder="Type a Message"
                   type="text"
-                  style={{ boxShadow: "0px 0px 10px #d3d3d3", borderRadius: "5px" }}
                   value={this.state.message}
-                  onChange={this.hanleSearchChange}
+                  onChange={this.handleSearchChange}
                 />
               </Col>
               <Col span={2}>
@@ -146,7 +148,7 @@ export class Chat extends Component {
               <Col span={4}>
                 <Button
                   type="primary"
-                  style={{ width: "100%", boxShadow: "0px 0px 30px #d3d3d3", borderRadius: "5px" }}
+                  style={{ width: "100%" }}
                   onClick={this.submitMessage}
                   htmlType="submit"
                 >
