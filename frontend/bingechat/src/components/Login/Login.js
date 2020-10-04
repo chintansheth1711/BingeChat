@@ -38,6 +38,7 @@ function Login(props) {
             .then(response => {
               if (response.payload.success) {
                 localStorage.setItem('token', response.payload.user.token);
+                localStorage.setItem('name', response.payload.user.fname + response.payload.user.lname);
                 props.history.push("/");
               } else {
                 setFormErrorMessage('Please check your Email ID and Password')

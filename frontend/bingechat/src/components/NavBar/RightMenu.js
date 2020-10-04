@@ -38,7 +38,7 @@ function RightMenu(props) {
     );
   } else if (token && user.userData) {
     return (
-      <Menu mode={props.mode} className="logoutContainer">
+      <Menu mode={props.mode}>
         <Menu.Item key="logout">
           <a onClick={logout} className="logoutBtn">
             Logout
