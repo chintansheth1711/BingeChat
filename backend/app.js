@@ -56,6 +56,9 @@ io.on("connection", (socket) => {
       Chat.findById(chat._id)
         .populate("sender")
         .exec((err, res) => {
+          if (err) {
+            return io.to(socket.id).emit("Error Message", "Message not sent.Please try again")
+          }
           return io.emit("Output Message", res);
         })
 
